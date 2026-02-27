@@ -1,7 +1,9 @@
-emailjs.init("NeUue__k7rbn7JL5e");
 // Loader
 window.addEventListener("load", function() {
     document.querySelector(".loader-wrapper").classList.add("hidden");
+    
+    // Initialize EmailJS inside window load event
+    emailjs.init("NeUue__k7rbn7JL5e");
 });
 
 setTimeout(function() {
