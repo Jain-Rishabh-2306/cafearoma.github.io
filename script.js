@@ -4,6 +4,12 @@ window.addEventListener("load", function() {
     document.querySelector(".loader-wrapper").style.display = "none";
 });
 
+// Backup - hide loader after 3 seconds no matter what
+setTimeout(function() {
+    const loader = document.querySelector(".loader-wrapper");
+    if(loader) loader.style.display = "none";
+}, 3000);
+
 // Navbar shadow on scroll
 window.addEventListener("scroll", function() {
     document.querySelector(".navbar")
