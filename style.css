@@ -1,0 +1,385 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+/* Root Colors */
+:root {
+    --primary: #2C1810;
+    --secondary: #D4956A;
+    --accent: #F5F0E8;
+    --bg: #FAFAFA;
+    --text: #1A1A1A;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* NAVBAR */
+.navbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background: white;
+    padding: 15px 0;
+    z-index: 1000;
+    transition: 0.3s;
+}
+
+.navbar.scrolled {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    color: var(--secondary);
+}
+
+.hamburger {
+    display: none;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+/* HERO */
+.hero {
+    height: 100vh;
+    background: url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb') center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    position: relative;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    margin-bottom: 30px;
+}
+
+.btn {
+    padding: 12px 25px;
+    border: none;
+    background: var(--secondary);
+    color: white;
+    text-decoration: none;
+    margin: 5px;
+    margin-top: 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.btn:hover {
+    background: var(--primary);
+}
+
+/* FEATURES */
+.features {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    gap: 30px;
+}
+
+.feature i {
+    font-size: 40px;
+    color: var(--secondary);
+    margin-bottom: 15px;
+}
+
+/* CARDS */
+.cards {
+    padding: 80px 0;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+    gap: 30px;
+}
+
+.card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.card-content h3 {
+    margin-bottom: 10px;
+}
+
+/* ABOUT SECTION */
+.about {
+    padding: 80px 0;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+    gap: 40px;
+    align-items: center;
+}
+
+.about img {
+    width: 100%;
+    border-radius: 15px;
+}
+
+/* MENU */
+.menu-section {
+    padding: 120px 0 80px;
+}
+
+.menu-category {
+    margin-bottom: 50px;
+}
+
+.menu-category h2 {
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.menu-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+/* CONTACT */
+.contact-section {
+    padding: 120px 0 80px;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+    gap: 40px;
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+footer {
+    background: var(--primary);
+    color: white;
+    padding: 40px 0;
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    .nav-links {
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        width: 200px;
+        display: none;
+        padding: 20px;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .hamburger {
+        display: block;
+    }
+}
+
+/* ---------------- LOADER ---------------- */
+.loader-wrapper {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: var(--bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.coffee-loader {
+    width: 50px;
+    height: 50px;
+    border: 5px solid var(--secondary);
+    border-top: 5px solid var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+/* PAGE FADE */
+body {
+    animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* SCROLL REVEAL */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: 0.8s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* PREMIUM CARD HOVER */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+/* NAV ACTIVE LINK */
+.nav-links a.active {
+    color: var(--secondary);
+    font-weight: 600;
+}
+
+/* BUTTON HOVER PREMIUM */
+.btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    background: var(--primary);
+    left: 0;
+    top: 0;
+    transition: 0.4s;
+    z-index: -1;
+}
+
+.btn:hover::after {
+    width: 100%;
+}
+
+/* RESERVATION */
+.reservation-section {
+    background: var(--accent);
+    border-radius: 20px;
+    padding: 60px;
+}
+
+.reservation-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.reservation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.reservation-form input,
+.reservation-form select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-family: 'Poppins', sans-serif;
+}
