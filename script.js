@@ -1,3 +1,4 @@
+emailjs.init("NeUue__k7rbn7JL5e");
 // Loader
 window.addEventListener("load", function() {
     document.querySelector(".loader-wrapper").style.display = "none";
