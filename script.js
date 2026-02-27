@@ -1,14 +1,13 @@
 emailjs.init("NeUue__k7rbn7JL5e");
 // Loader
 window.addEventListener("load", function() {
-    document.querySelector(".loader-wrapper").style.display = "none";
+    document.querySelector(".loader-wrapper").classList.add("hidden");
 });
 
-// Backup - hide loader after 3 seconds no matter what
 setTimeout(function() {
     const loader = document.querySelector(".loader-wrapper");
-    if(loader) loader.style.display = "none";
-}, 3000);
+    if(loader) loader.classList.add("hidden");
+}, 2000);
 
 // Navbar shadow on scroll
 window.addEventListener("scroll", function() {
