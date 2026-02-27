@@ -12,7 +12,6 @@ setTimeout(function() {
 window.addEventListener("scroll", function() {
     document.querySelector(".navbar")
         .classList.toggle("scrolled", window.scrollY > 50);
-
     revealOnScroll();
 });
 
@@ -44,7 +43,6 @@ function revealOnScroll() {
         const windowHeight = window.innerHeight;
         const elementTop = element.getBoundingClientRect().top;
         const revealPoint = 100;
-
         if (elementTop < windowHeight - revealPoint) {
             element.classList.add("active");
         }
@@ -68,52 +66,19 @@ const contactForm = document.getElementById("contactForm");
 if(contactForm){
     contactForm.addEventListener("submit", function(e){
         e.preventDefault();
-
         const name = contactForm.querySelector("input[type='text']").value.trim();
         const email = contactForm.querySelector("input[type='email']").value.trim();
         const message = contactForm.querySelector("textarea").value.trim();
-
         if(name === "" || email === "" || message === ""){
             alert("Please fill in all fields ☕");
         } else {
-            alert("Thank you for contacting Café Aroma! We’ll get back to you soon 🤎");
+            alert("Thank you for contacting Café Aroma! We'll get back to you soon 🤎");
             contactForm.reset();
         }
     });
 }
 
-// Reservation Form with WhatsApp + EmailJS
-const reservationForm = document.getElementById("reservationForm");
-
-if (reservationForm) {
-
-    emailjs.init("NeUue__k7rbn7JL5e");
-
-    reservationForm.addEventListener("submit", function(e) {
-        e.preventDefault();
-
-        const name = document.getElementById("resName").value.trim();
-        const phone = document.getElementById("resPhone").value.trim();
-        const date = document.getElementById("resDate").value;
-        const time = document.getElementById("resTime").value;
-        const guests = document.getElementById("resGuests").value;
-
-        if (!name || !phone || !date || !time || !guests) {
-            alert("Please fill all reservation details ☕");
-            return;
-        }
-
-// Date validation
-const selectedDate = new Date(date);
-const today = new Date();
-today.setHours(0,0,0,0);
-
-if (selectedDate < today) {
-alert("Please select a valid future date 📅");
-return;
-}
-
-// Reservation Form with EmailJS + Optional WhatsApp
+// Reservation Form with EmailJS
 const reservationForm = document.getElementById("reservationForm");
 
 if (reservationForm) {
@@ -135,7 +100,6 @@ if (reservationForm) {
             return;
         }
 
-        // Date validation
         const selectedDate = new Date(date);
         const today = new Date();
         today.setHours(0,0,0,0);
@@ -145,7 +109,6 @@ if (reservationForm) {
             return;
         }
 
-        // Send Email To Owner
         emailjs.send("service_99k4iig", "template_xeiac2b", {
             from_name: name,
             from_phone: phone,
@@ -155,7 +118,6 @@ if (reservationForm) {
             email: email
         })
         .then(function() {
-            // Send Confirmation To Customer
             return emailjs.send("service_99k4iig", "template_n1ogb2r", {
                 from_name: name,
                 reservation_date: date,
@@ -165,8 +127,6 @@ if (reservationForm) {
             });
         })
         .then(function() {
-
-            // Show success message with WhatsApp option
             const formSection = document.querySelector(".reservation-section");
             formSection.innerHTML = `
                 <div style="text-align:center; padding: 60px 20px;">
@@ -176,13 +136,7 @@ if (reservationForm) {
                     <p style="margin-bottom: 10px;">⏰ Time: <strong>${time}</strong></p>
                     <p style="margin-bottom: 30px;">👥 Guests: <strong>${guests}</strong></p>
                     <p style="margin-bottom: 40px; color: #666;">A confirmation email has been sent to <strong>${email}</strong></p>
-                    
-                    <p style="margin-bottom: 20px; font-weight: 500;">Want to also notify us on WhatsApp?</p>
-                    <button onclick="sendWhatsApp('${name}','${phone}','${date}','${time}','${guests}')" 
-                        class="btn" 
-                        style="background: #25D366; border-color: #25D366; color: white;">
-                        💬 Send WhatsApp Message
-                    </button>
+                    <p style="color: var(--primary); font-weight: 500;">We look forward to welcoming you at Café Aroma ☕</p>
                 </div>
             `;
         })
@@ -192,57 +146,4 @@ if (reservationForm) {
         });
 
     });
-}
-
-// WhatsApp Function
-function sendWhatsApp(name, phone, date, time, guests) {
-    const cafeNumber = "916376533378";
-    const message = `Hello Café Aroma ☕
-
-I'd like to confirm my reservation:
-
-Name: ${name}
-Phone: ${phone}
-Date: ${date}
-Time: ${time}
-Guests: ${guests}
-
-Looking forward to visiting 🤎`;
-
-    const whatsappURL = `https://wa.me/${cafeNumber}?text=${encodeURIComponent(message)}`;
-    window.open(whatsappURL, "_blank");
-}
-
-const email = document.getElementById("email").value;
-
-// 1️⃣ Send Email To Owner
-emailjs.send("service_99k4iig", "template_xeiac2b", {
-    from_name: name,
-    from_phone: phone,
-    reservation_date: date,
-    reservation_time: time,
-    guests: guests,
-    email: email
-})
-.then(function() {
-    // 2️⃣ Send Confirmation To Customer
-    return emailjs.send("service_99k4iig", "template_n1ogb2r", {
-        from_name: name,
-        reservation_date: date,
-        reservation_time: time,
-        guests: guests,
-        email: email
-    });
-})
-.then(function() {
-    alert("Reservation successful! 🎉 Confirmation email sent. Check WhatsApp to confirm.");
-    reservationForm.reset();
-})
-.catch(function(error) {
-    alert("Something went wrong. Please try again.");
-    console.log("Email failed...",error);
-});
-
-
-});
 }
