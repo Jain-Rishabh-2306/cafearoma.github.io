@@ -113,10 +113,91 @@ alert("Please select a valid future date 📅");
 return;
 }
 
-// -------- WHATSAPP AUTO MESSAGE --------
-const cafeNumber = "916376533378"; // Replace with your real WhatsApp number (country code included)
+// Reservation Form with EmailJS + Optional WhatsApp
+const reservationForm = document.getElementById("reservationForm");
 
-const message = `Hello Café Aroma ☕
+if (reservationForm) {
+
+    emailjs.init("NeUue__k7rbn7JL5e");
+
+    reservationForm.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById("resName").value.trim();
+        const phone = document.getElementById("resPhone").value.trim();
+        const date = document.getElementById("resDate").value;
+        const time = document.getElementById("resTime").value;
+        const guests = document.getElementById("resGuests").value;
+        const email = document.getElementById("email").value.trim();
+
+        if (!name || !phone || !date || !time || !guests || !email) {
+            alert("Please fill all reservation details ☕");
+            return;
+        }
+
+        // Date validation
+        const selectedDate = new Date(date);
+        const today = new Date();
+        today.setHours(0,0,0,0);
+
+        if (selectedDate < today) {
+            alert("Please select a valid future date 📅");
+            return;
+        }
+
+        // Send Email To Owner
+        emailjs.send("service_99k4iig", "template_xeiac2b", {
+            from_name: name,
+            from_phone: phone,
+            reservation_date: date,
+            reservation_time: time,
+            guests: guests,
+            email: email
+        })
+        .then(function() {
+            // Send Confirmation To Customer
+            return emailjs.send("service_99k4iig", "template_n1ogb2r", {
+                from_name: name,
+                reservation_date: date,
+                reservation_time: time,
+                guests: guests,
+                email: email
+            });
+        })
+        .then(function() {
+
+            // Show success message with WhatsApp option
+            const formSection = document.querySelector(".reservation-section");
+            formSection.innerHTML = `
+                <div style="text-align:center; padding: 60px 20px;">
+                    <h2 style="color: var(--primary); margin-bottom: 20px;">🎉 Reservation Confirmed!</h2>
+                    <p style="font-size: 1.1rem; margin-bottom: 10px;">Thank you <strong>${name}</strong>! Your table has been booked.</p>
+                    <p style="margin-bottom: 10px;">📅 Date: <strong>${date}</strong></p>
+                    <p style="margin-bottom: 10px;">⏰ Time: <strong>${time}</strong></p>
+                    <p style="margin-bottom: 30px;">👥 Guests: <strong>${guests}</strong></p>
+                    <p style="margin-bottom: 40px; color: #666;">A confirmation email has been sent to <strong>${email}</strong></p>
+                    
+                    <p style="margin-bottom: 20px; font-weight: 500;">Want to also notify us on WhatsApp?</p>
+                    <button onclick="sendWhatsApp('${name}','${phone}','${date}','${time}','${guests}')" 
+                        class="btn" 
+                        style="background: #25D366; border-color: #25D366; color: white;">
+                        💬 Send WhatsApp Message
+                    </button>
+                </div>
+            `;
+        })
+        .catch(function(error) {
+            alert("Something went wrong. Please try again.");
+            console.log("Email failed...", error);
+        });
+
+    });
+}
+
+// WhatsApp Function
+function sendWhatsApp(name, phone, date, time, guests) {
+    const cafeNumber = "916376533378";
+    const message = `Hello Café Aroma ☕
 
 I'd like to confirm my reservation:
 
@@ -128,9 +209,9 @@ Guests: ${guests}
 
 Looking forward to visiting 🤎`;
 
-const whatsappURL = `https://wa.me/${cafeNumber}?text=${encodeURIComponent(message)}`;
-
-window.open(whatsappURL, "_blank");
+    const whatsappURL = `https://wa.me/${cafeNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappURL, "_blank");
+}
 
 const email = document.getElementById("email").value;
 
