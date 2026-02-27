@@ -1,9 +1,6 @@
 // Loader
 window.addEventListener("load", function() {
     document.querySelector(".loader-wrapper").classList.add("hidden");
-    
-    // Initialize EmailJS inside window load event
-    emailjs.init("NeUue__k7rbn7JL5e");
 });
 
 setTimeout(function() {
@@ -89,19 +86,22 @@ if(contactForm){
 const reservationForm = document.getElementById("reservationForm");
 
 if (reservationForm) {
-reservationForm.addEventListener("submit", function(e) {
-e.preventDefault();
 
-const name = document.getElementById("resName").value.trim();
-const phone = document.getElementById("resPhone").value.trim();
-const date = document.getElementById("resDate").value;
-const time = document.getElementById("resTime").value;
-const guests = document.getElementById("resGuests").value;
+    emailjs.init("NeUue__k7rbn7JL5e");
 
-if (!name || !phone || !date || !time || !guests) {
-alert("Please fill all reservation details ☕");
-return;
-}
+    reservationForm.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById("resName").value.trim();
+        const phone = document.getElementById("resPhone").value.trim();
+        const date = document.getElementById("resDate").value;
+        const time = document.getElementById("resTime").value;
+        const guests = document.getElementById("resGuests").value;
+
+        if (!name || !phone || !date || !time || !guests) {
+            alert("Please fill all reservation details ☕");
+            return;
+        }
 
 // Date validation
 const selectedDate = new Date(date);
